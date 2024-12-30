@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary colors -->
+    <color name="colorPrimary">#1E88E5</color> <!-- Medium blue -->
+    <color name="colorPrimaryDark">#1565C0</color> <!-- Dark blue -->
+    <color name="colorAccent">#42A5F5</color> <!-- Light blue -->
+    <color name="colorBackground">#E3F2FD</color> <!-- Very light blue -->
+
+    <!-- Additional colors -->
+    <color name="colorOnPrimary">#FFFFFF</color> <!-- Text on primary (white) -->
+    <color name="colorOnBackground">#212121</color> <!-- Text on background (dark gray) -->
+    <color name="colorSurface">#90CAF9</color> <!-- Card background -->
+    <color name="colorOnSurface">#0D47A1</color> <!-- Text on surface -->
+</resources>
