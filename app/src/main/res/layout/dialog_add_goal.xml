@@ -10,13 +10,13 @@
         android:id="@+id/goalEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your goal" />
+        android:hint="Enter your goal"
+        android:maxLength="45"
+        />
 
-    <Button
-        android:layout_marginTop="10dp"
+    <CheckBox
+        android:id="@+id/goalCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Add"/>
-
+        android:text="Permanent Goal"/>
 </LinearLayout>

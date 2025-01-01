@@ -63,6 +63,34 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return goals
     }
 
+    // Get goals for a specific date 'yyyy-MM-dd'
+    fun getGoalsByDate(date: String): MutableList<Goal> {
+        val db = readableDatabase
+        val selection = "$COLUMN_DATE = ?" // WHERE clause
+        val selectionArgs = arrayOf(date) // Arguments for the WHERE clause
+        val cursor: Cursor = db.query(
+            TABLE_NAME, // Table name
+            null, // Columns (null means all columns)
+            selection, // WHERE clause
+            selectionArgs, // WHERE arguments
+            null, // GROUP BY
+            null, // HAVING
+            null // ORDER BY
+        )
+        val goals = mutableListOf<Goal>()
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow(COLUMN_ID))
+                val goal = getString(getColumnIndexOrThrow(COLUMN_GOAL))
+                val isCompleted = getInt(getColumnIndexOrThrow(COLUMN_IS_COMPLETED)) == 1
+                goals.add(Goal(id, goal, date, isCompleted))
+            }
+        }
+        cursor.close()
+        return goals
+    }
+
+
     // Update a goal
     fun updateGoal(id: Int, goal: String, date: String, isCompleted: Boolean): Int {
         val db = writableDatabase
@@ -79,4 +107,47 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val db = writableDatabase
         return db.delete(TABLE_NAME, "$COLUMN_ID = ?", arrayOf(id.toString()))
     }
+
+
+    // Get All Dates in Descending Order
+    fun getAllDates(): List<String> {
+        val dates = mutableListOf<String>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT DISTINCT $COLUMN_DATE FROM $TABLE_NAME ORDER BY $COLUMN_DATE DESC", null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                dates.add(cursor.getString(0))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return dates
+    }
+
+
+    fun getTotalGoalsByDate(date: String): Int {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT COUNT(*) FROM $TABLE_NAME WHERE $COLUMN_DATE = ?", arrayOf(date))
+        var totalGoals = 0
+        if (cursor.moveToFirst()) {
+            totalGoals = cursor.getInt(0)
+        }
+        cursor.close()
+        return totalGoals
+    }
+
+
+    fun getCompletedGoalsByDate(date: String): Int {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT COUNT(*) FROM $TABLE_NAME WHERE $COLUMN_DATE = ? AND $COLUMN_IS_COMPLETED = 1", arrayOf(date))
+        var completedGoals = 0
+        if (cursor.moveToFirst()) {
+            completedGoals = cursor.getInt(0)
+        }
+        cursor.close()
+        return completedGoals
+    }
+
+
+
 }

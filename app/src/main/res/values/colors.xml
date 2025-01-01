@@ -11,4 +11,9 @@
     <color name="colorOnBackground">#212121</color> <!-- Text on background (dark gray) -->
     <color name="colorSurface">#90CAF9</color> <!-- Card background -->
     <color name="colorOnSurface">#0D47A1</color> <!-- Text on surface -->
+
+    <color name="black">#212121</color>
+    <color name="lightGray">#D3D3D3</color>
+    <color name="white">#FFFFFF</color>
+
 </resources>

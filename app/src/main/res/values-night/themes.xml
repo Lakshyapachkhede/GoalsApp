@@ -19,6 +19,18 @@
         <!-- Default text appearance -->
         <item name="textAppearanceHeadline1">@style/TextAppearance.Headline1</item>
         <item name="textAppearanceBody1">@style/TextAppearance.Body1</item>
+
+        <!-- Font -->
+        <item name="fontFamily">@font/poppins</item>
+
     </style>
+
+    <!-- Dialog style with custom background color -->
+    <style name="CustomDialogStyle" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="android:windowBackground">#1E1E1E</item> <!-- Set background color -->
+        <item name="android:textColorPrimary">#FFFFFF</item> <!-- Text color -->
+        <item name="android:textColorSecondary">#B0BEC5</item>
+    </style>
+
 
 </resources>
