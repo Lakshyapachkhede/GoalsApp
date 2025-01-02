@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class GoalHistoryAdapter(private val historyList: List<GoalHistory>) : RecyclerView.Adapter<GoalHistoryAdapter.GoalHistoryViewHolder>(){
+class GoalHistoryAdapter(private val historyList: MutableList<GoalHistory>) : RecyclerView.Adapter<GoalHistoryAdapter.GoalHistoryViewHolder>(){
 
     class GoalHistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvDay : TextView = itemView.findViewById(R.id.tvDay)
@@ -29,6 +29,12 @@ class GoalHistoryAdapter(private val historyList: List<GoalHistory>) : RecyclerV
         val percentage : String = item.percentage.toString() + "%"
         holder.tvPercentage.text = percentage
 
+
+    }
+
+    fun updateItem(position: Int, updatedItem : GoalHistory) {
+        historyList[position] = updatedItem
+        notifyItemChanged(position)
 
     }
 

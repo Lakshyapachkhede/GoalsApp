@@ -7,18 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pachkhede.goals.databinding.FragmentHistoryBinding
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class HistoryFragment : Fragment() {
 
     private var _binding : FragmentHistoryBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var historyData : MutableList<GoalHistory>
+    private lateinit var adapter : GoalHistoryAdapter
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+
+        dbHelper = DatabaseHelper(requireContext())
 
         setupRecyclerView()
 
@@ -34,15 +40,15 @@ class HistoryFragment : Fragment() {
 
     private fun setupRecyclerView() {
         val dbHelper = DatabaseHelper(requireContext())
-        val historyData = fetchHistoryData(dbHelper)
+        historyData =  fetchHistoryData(dbHelper)
 
-        val adapter = GoalHistoryAdapter(historyData)
+        adapter = GoalHistoryAdapter(historyData)
         binding.goalHistoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.goalHistoryRecyclerView.adapter = adapter
     }
 
-    private fun fetchHistoryData(dbHelper: DatabaseHelper): List<GoalHistory> {
-        val historyList = mutableListOf<GoalHistory>()
+    private fun fetchHistoryData(dbHelper: DatabaseHelper): MutableList<GoalHistory> {
+        val historyList = (mutableListOf<GoalHistory>())
 
         val allDates = dbHelper.getAllDates()
         for (date in allDates) {
@@ -81,7 +87,25 @@ class HistoryFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        val currentDate = LocalDate.now() // Get today's date
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd") // Define the desired format
+        val date =  currentDate.format(formatter) // Format the date
+        val dateParts = date.split("-") // Assuming date format is YYYY-MM-DD
+        val day = dateParts[2] // Extract day
+        val monthYear = "${getMonthAbbreviation(dateParts[1])} ${dateParts[0]}" // Format as "Mon YYYY"
 
 
+        if (historyData[0].day == day && historyData[0].monthYear == monthYear) {
+            val totalGoals = dbHelper.getTotalGoalsByDate(date)
+            val completedGoals = dbHelper.getCompletedGoalsByDate(date)
 
+            val percentage = if (totalGoals > 0) (completedGoals * 100) / totalGoals else 0
+
+            adapter.updateItem(0, GoalHistory(day, monthYear, percentage))
+        }
+
+    }
 }

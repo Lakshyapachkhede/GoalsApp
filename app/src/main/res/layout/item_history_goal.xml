@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,8 +9,7 @@
     android:layout_marginBottom="8dp"
     android:layout_marginStart="4dp"
     android:layout_marginEnd="4dp"
-    android:background="@drawable/goal_history_grid_background"
-    >
+    android:background="@drawable/goal_history_grid_background">
 
     <!-- Date Number -->
     <TextView
@@ -21,7 +19,8 @@
         android:text="1"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="?attr/colorOnSurface" /> <!-- Text color adapts to theme -->
 
     <!-- Month and Year -->
     <TextView
@@ -31,7 +30,8 @@
         android:text="JAN 2025"
         android:textSize="14sp"
         android:gravity="center"
-        android:layout_marginTop="4dp" />
+        android:layout_marginTop="4dp"
+        android:textColor="?attr/colorOnSurface" /> <!-- Text color adapts to theme -->
 
     <!-- Percentage Completed -->
     <TextView
@@ -42,6 +42,6 @@
         android:textSize="14sp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:textStyle="italic" />
-
+        android:textStyle="italic"
+        android:textColor="?attr/colorSecondary" /> <!-- Secondary text color -->
 </LinearLayout>

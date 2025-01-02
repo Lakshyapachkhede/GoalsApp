@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorOutline">#B0BEC5</item>
 
         <!-- Background colors -->
         <item name="android:colorBackground">@color/colorBackground</item>
@@ -15,7 +16,7 @@
         <item name="android:textColor">@color/colorOnBackground</item>
         <item name="android:textColorPrimary">@color/colorOnPrimary</item>
         <item name="android:textColorSecondary">@color/colorOnSurface</item>
-
+        <item name="colorOnSurface">#FFFFFF</item>
 
 
         <!-- Default text appearance -->

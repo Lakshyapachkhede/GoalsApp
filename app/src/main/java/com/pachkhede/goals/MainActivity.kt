@@ -36,4 +36,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun scheduleNotificationChannel() {
+        TODO()
+    }
+
+
+    private fun createNotificationChannel() {
+        val name = "Morning and Night Notification"
+        val desc = "Notifies you daily in morning and night"
+        TODO()
+    }
+
+
+
 }

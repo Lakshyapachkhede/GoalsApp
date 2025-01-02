@@ -14,9 +14,4 @@
         android:maxLength="45"
         />
 
-    <CheckBox
-        android:id="@+id/goalCheckbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Permanent Goal"/>
 </LinearLayout>
